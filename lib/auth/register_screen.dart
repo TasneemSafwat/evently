@@ -1,16 +1,17 @@
-import 'package:evently/auth/register_screen.dart';
+import 'package:evently/auth/login_screen.dart';
 import 'package:evently/widges/default_elevated_button.dart';
 import 'package:evently/widges/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String routename = '/loginScreen';
+class RegisterScreen extends StatefulWidget {
+  static const String routename = '/registerScreen';
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -30,6 +31,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   'assets/images/logo.png',
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   fit: BoxFit.fill,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                DefaultTextFormField(
+                  controller: nameController,
+                  hintText: 'Name',
+                  prefixIconImageName: 'name',
+                  validator: (value) {
+                    if (value == null || value.length < 3) {
+                      return "invalid name";
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: 16,
@@ -63,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 24,
                 ),
-                DefaultElevatedButton(lable: 'login', onPressed: login),
+                DefaultElevatedButton(lable: 'register', onPressed: register),
                 SizedBox(
                   height: 20,
                 ),
@@ -71,13 +86,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account?",
+                      "Already have an account?",
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     TextButton(
                       onPressed: () => Navigator.of(context)
-                          .pushNamed(RegisterScreen.routename),
-                      child: Text('Create Account'),
+                          .pushNamed(LoginScreen.routename),
+                      child: Text('Login'),
                     ),
                   ],
                 )
@@ -89,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login() {
+  void register() {
     if (formKey.currentState!.validate()) {}
   }
 }
