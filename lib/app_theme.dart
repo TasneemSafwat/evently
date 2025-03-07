@@ -102,6 +102,11 @@ class AppTheme {
         fontWeight: FontWeight.w500,
         color: white,
       ),
+      displayMedium: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: primary,

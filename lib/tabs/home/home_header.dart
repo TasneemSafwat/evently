@@ -1,0 +1,66 @@
+import 'package:evently/app_theme.dart';
+import 'package:evently/models/category.dart';
+import 'package:evently/tabs/home/tabs_item.dart';
+import 'package:flutter/material.dart';
+
+class HomeHeader extends StatefulWidget {
+  @override
+  State<HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends State<HomeHeader> {
+  int currentIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(bottom: 16, left: 16),
+      decoration: BoxDecoration(
+        color: AppTheme.primary,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(16),
+          bottomRight: Radius.circular(16),
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Welcome Back ✨',
+              style: textTheme.bodyMedium?.copyWith(color: AppTheme.white),
+            ),
+            Text(
+              'mhmd mlazm',
+              style: textTheme.displayMedium,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            DefaultTabController(
+              length: Category.categories.length,
+              child: TabBar(
+                indicatorColor: Colors.transparent,
+                dividerColor: Colors.transparent,
+                tabAlignment: TabAlignment.start,
+                isScrollable: true,
+                onTap: (index) {
+                  currentIndex = index;
+                  setState(() {});
+                },
+                tabs: Category.categories
+                    .map<Widget>((category) => TabsItem(
+                          category: category,
+                          isSelected: currentIndex ==
+                              Category.categories.indexOf(category),
+                        ))
+                    .toList(),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

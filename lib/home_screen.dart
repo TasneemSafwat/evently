@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           items: [
             BottomNavigationBarItem(
                 icon: NavBarItem(imageName: 'unActiveHome'),
-                activeIcon: NavBarItem(imageName: 'activeHome'),
+                activeIcon: NavBarItem(imageName: 'unActiveHome'),
                 label: 'Home'),
             BottomNavigationBarItem(
                 icon: NavBarItem(imageName: 'unactiveMap'),
