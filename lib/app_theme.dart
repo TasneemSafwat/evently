@@ -15,9 +15,9 @@ class AppTheme {
       foregroundColor: primary,
       centerTitle: true,
       titleTextStyle: TextStyle(
-        fontSize: 16,
+        fontSize: 22,
         fontWeight: FontWeight.w500,
-        color: black,
+        color: primary,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(

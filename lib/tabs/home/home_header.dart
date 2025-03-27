@@ -44,6 +44,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                 indicatorColor: Colors.transparent,
                 dividerColor: Colors.transparent,
                 tabAlignment: TabAlignment.start,
+                labelPadding: EdgeInsets.symmetric(horizontal: 10),
                 isScrollable: true,
                 onTap: (index) {
                   currentIndex = index;
@@ -54,6 +55,9 @@ class _HomeHeaderState extends State<HomeHeader> {
                           category: category,
                           isSelected: currentIndex ==
                               Category.categories.indexOf(category),
+                          selectedBackgroundColor: AppTheme.white,
+                          selectedForeBackgroundColor: AppTheme.primary,
+                          unselectedForeBackgroundcorlor: AppTheme.white,
                         ))
                     .toList(),
               ),

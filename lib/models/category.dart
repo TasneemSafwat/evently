@@ -15,7 +15,7 @@ class Category {
         id: '1',
         name: 'Sports',
         icon: Icons.sports_basketball_outlined,
-        imageName: 'sports'),
+        imageName: 'sport'),
     Category(
         id: '2',
         name: 'Birthday',

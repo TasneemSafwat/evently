@@ -1,3 +1,4 @@
+import 'package:evently/create_event_screen.dart';
 import 'package:evently/tabs/home/home_tab.dart';
 import 'package:evently/tabs/love/love_tab.dart';
 import 'package:evently/tabs/map/map_tab.dart';
@@ -49,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: 'Profile'),
           ]),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () =>
+            Navigator.of(context).pushNamed(CreateEventScreen.routeName),
         child: Icon(
           Icons.add,
           size: 36,
