@@ -10,6 +10,7 @@ class DefaultTextFormField extends StatefulWidget {
     this.validator,
     this.isPassword = false,
     this.onChanged,
+    this.maxLines,
   });
   TextEditingController? controller;
   String hintText;
@@ -17,6 +18,7 @@ class DefaultTextFormField extends StatefulWidget {
   String? Function(String?)? validator;
   bool isPassword;
   void Function(String)? onChanged;
+  int? maxLines;
   @override
   State<DefaultTextFormField> createState() => _DefaultTextFormFieldState();
 }
@@ -30,13 +32,15 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
       onChanged: widget.onChanged,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        prefixIcon: SvgPicture.asset(
-          'assets/icons/${widget.prefixIconImageName}.svg',
-          height: 24,
-          width: 24,
-          fit: BoxFit.scaleDown,
-          colorFilter: ColorFilter.mode(AppTheme.grey, BlendMode.srcIn),
-        ),
+        prefixIcon: widget.prefixIconImageName == null
+            ? null
+            : SvgPicture.asset(
+                'assets/icons/${widget.prefixIconImageName}.svg',
+                height: 24,
+                width: 24,
+                fit: BoxFit.scaleDown,
+                colorFilter: ColorFilter.mode(AppTheme.grey, BlendMode.srcIn),
+              ),
         suffixIcon: widget.isPassword
             ? IconButton(
                 onPressed: () {
@@ -51,6 +55,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
               )
             : null,
       ),
+      maxLines: widget.maxLines,
       obscureText: isObscure,
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,

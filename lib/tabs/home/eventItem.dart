@@ -8,7 +8,12 @@ class Eventitem extends StatelessWidget {
     return Stack(children: [
       ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Image.asset('assets/images/sport.png'),
+        child: Image.asset(
+          'assets/images/sport.png',
+          width: double.infinity,
+          height: MediaQuery.sizeOf(context).height * 0.32,
+          fit: BoxFit.fill,
+        ),
       ),
       Container(
         margin: EdgeInsets.all(8),
