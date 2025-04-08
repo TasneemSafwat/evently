@@ -3,9 +3,11 @@ import 'package:evently/auth/login_screen.dart';
 import 'package:evently/auth/register_screen.dart';
 import 'package:evently/create_event_screen.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/providers/event_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +30,8 @@ void main() async {
     print("🔥 خطأ أثناء تهيئة Firebase: $e");
   }
 
-  runApp(const EventlyApp());
+  runApp(ChangeNotifierProvider(
+      create: (_) => EventProvider(), child: const EventlyApp()));
 }
 
 class EventlyApp extends StatelessWidget {

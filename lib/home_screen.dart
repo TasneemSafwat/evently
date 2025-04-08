@@ -28,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: (index) {
+            if (currentIndex == index) return;
+
             currentIndex = index;
             setState(() {});
           },

@@ -20,7 +20,7 @@ class LoveTab extends StatelessWidget {
             ),
             Expanded(
               child: ListView.separated(
-                itemBuilder: (_, index) => Eventitem(),
+                itemBuilder: (_, index) => Container(),
                 itemCount: 10,
                 separatorBuilder: (_, __) => SizedBox(
                   height: 16,

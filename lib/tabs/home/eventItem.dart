@@ -1,7 +1,11 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/models/event.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Eventitem extends StatelessWidget {
+  Eventitem(this.event);
+  Event event;
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -9,7 +13,7 @@ class Eventitem extends StatelessWidget {
       ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.asset(
-          'assets/images/sport.png',
+          'assets/images/${event.category.imageName}.png',
           width: double.infinity,
           height: MediaQuery.sizeOf(context).height * 0.32,
           fit: BoxFit.fill,
@@ -23,7 +27,7 @@ class Eventitem extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              '21',
+              '${event.dateTime.day}',
               style: textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold, color: AppTheme.primary),
             ),
@@ -31,7 +35,7 @@ class Eventitem extends StatelessWidget {
               height: 4,
             ),
             Text(
-              'Nov',
+              DateFormat('MMM').format(event.dateTime),
               style: textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold, color: AppTheme.primary),
             ),
@@ -49,10 +53,12 @@ class Eventitem extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: Row(
             children: [
-              Text(
-                'Meeting for Updating The Development Method ',
-                style:
-                    textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text(
+                  event.title,
+                  style: textTheme.bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
               ),
               IconButton(
                   onPressed: () {}, icon: Icon(Icons.favorite_outline_rounded))

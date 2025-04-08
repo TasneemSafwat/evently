@@ -1,15 +1,15 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/models/category.dart';
 import 'package:flutter/material.dart';
 
 class TabsItem extends StatelessWidget {
   TabsItem(
-      {required this.category,
+      {required this.lable,
+      required this.icon,
       required this.isSelected,
       required this.selectedBackgroundColor,
       required this.selectedForeBackgroundColor,
       required this.unselectedForeBackgroundcorlor});
-  Category category;
+  String lable;
+  IconData icon;
   bool isSelected;
   Color selectedBackgroundColor;
   Color selectedForeBackgroundColor;
@@ -34,7 +34,7 @@ class TabsItem extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                category.icon,
+                icon,
                 color: isSelected
                     ? selectedForeBackgroundColor
                     : unselectedForeBackgroundcorlor,
@@ -43,7 +43,7 @@ class TabsItem extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                category.name,
+                lable,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: isSelected
                         ? selectedForeBackgroundColor

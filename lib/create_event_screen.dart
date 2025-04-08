@@ -2,12 +2,14 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/firebase_service.dart';
 import 'package:evently/models/category.dart';
 import 'package:evently/models/event.dart';
+import 'package:evently/providers/event_provider.dart';
 import 'package:evently/tabs/home/tabs_item.dart';
 import 'package:evently/widges/default_elevated_button.dart';
 import 'package:evently/widges/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CreateEventScreen extends StatefulWidget {
   static const String routeName = '/create_event';
@@ -62,7 +64,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               },
               tabs: Category.categories
                   .map<Widget>((category) => TabsItem(
-                        category: category,
+                        lable: category.name,
+                        icon: category.icon,
                         isSelected: currentIndex ==
                             Category.categories.indexOf(category),
                         selectedBackgroundColor: AppTheme.primary,
@@ -236,7 +239,13 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
           description: descriptionController.text,
           dateTime: dateTime,
           category: selectedCateogry);
-      FirebaseService.addEventToFirestore(event);
+      FirebaseService.addEventToFirestore(event).then((_) {
+        Provider.of<EventProvider>(context, listen: false).getEvents();
+        Navigator.of(context).pop();
+        print('Event Created');
+      }).catchError((_) {
+        print('Error to Create Event');
+      });
     }
   }
 }
