@@ -70,4 +70,22 @@ class FirebaseService {
   }
 
   static Future<void> logout() => FirebaseAuth.instance.signOut();
+
+  static Future<void> addEventToFavourite(String eventId) async {
+    CollectionReference<UserModel> usersCollection = getUserCollection();
+    return usersCollection.doc(FirebaseAuth.instance.currentUser!.uid).update(
+      {
+        'favouriteEventIds': FieldValue.arrayUnion([eventId]),
+      },
+    );
+  }
+
+  static Future<void> removeEventFromFavourite(String eventId) async {
+    CollectionReference<UserModel> usersCollection = getUserCollection();
+    return usersCollection.doc(FirebaseAuth.instance.currentUser!.uid).update(
+      {
+        'favouriteEventIds': FieldValue.arrayRemove([eventId]),
+      },
+    );
+  }
 }

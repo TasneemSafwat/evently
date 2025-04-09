@@ -1,13 +1,19 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/event.dart';
+import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class Eventitem extends StatelessWidget {
   Eventitem(this.event);
   Event event;
+
   @override
   Widget build(BuildContext context) {
+    bool isFavourite =
+        Provider.of<UserProvider>(context).checkIsEventFavourite(event.id);
     TextTheme textTheme = Theme.of(context).textTheme;
     return Stack(children: [
       ClipRRect(
@@ -61,7 +67,26 @@ class Eventitem extends StatelessWidget {
                 ),
               ),
               IconButton(
-                  onPressed: () {}, icon: Icon(Icons.favorite_outline_rounded))
+                onPressed: () {
+                  if (isFavourite) {
+                    Provider.of<UserProvider>(context, listen: false)
+                        .removeEventfromFavourite(event.id);
+                    Provider.of<EventProvider>(context, listen: false)
+                        .removeToFavourite(event.id);
+                  } else {
+                    Provider.of<UserProvider>(context, listen: false)
+                        .addEventToFavourite(event.id);
+                    Provider.of<EventProvider>(context, listen: false)
+                        .addToFavourite(event.id);
+                  }
+                },
+                icon: Icon(
+                  isFavourite
+                      ? Icons.favorite_rounded
+                      : Icons.favorite_outline_rounded,
+                  color: AppTheme.primary,
+                ),
+              ),
             ],
           ),
         ),

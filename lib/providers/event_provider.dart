@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class EventProvider with ChangeNotifier {
   List<Event> allEvents = [];
   List<Event> filteredEvent = [];
+  List<Event> favouriteEvent = [];
   Category? selectedCategory;
 
   Future<void> getEvents() async {
@@ -21,6 +22,20 @@ class EventProvider with ChangeNotifier {
       filteredEvent =
           allEvents.where((event) => event.category == category).toList();
     }
+    notifyListeners();
+  }
+
+  Future<void> addToFavourite(String eventId) {
+    return FirebaseService.addEventToFavourite(eventId);
+  }
+
+  Future<void> removeToFavourite(String eventId) {
+    return FirebaseService.removeEventFromFavourite(eventId);
+  }
+
+  void filterFavoriteEvents(List<String> favoriteIds) {
+    favouriteEvent =
+        allEvents.where((event) => favoriteIds.contains(event.id)).toList();
     notifyListeners();
   }
 }

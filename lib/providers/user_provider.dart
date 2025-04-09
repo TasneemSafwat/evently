@@ -7,4 +7,18 @@ class UserProvider with ChangeNotifier {
     currentUser = user;
     notifyListeners();
   }
+
+  bool checkIsEventFavourite(String eventId) {
+    return currentUser!.favouriteEventIds.contains(eventId);
+  }
+
+  void addEventToFavourite(String eventId) {
+    currentUser!.favouriteEventIds.add(eventId);
+    notifyListeners();
+  }
+
+  void removeEventfromFavourite(String eventId) {
+    currentUser!.favouriteEventIds.remove(eventId);
+    notifyListeners();
+  }
 }

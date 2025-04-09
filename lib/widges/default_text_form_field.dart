@@ -59,6 +59,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
       obscureText: isObscure,
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
     );
   }
 }
