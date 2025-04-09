@@ -4,6 +4,7 @@ import 'package:evently/auth/register_screen.dart';
 import 'package:evently/create_event_screen.dart';
 import 'package:evently/home_screen.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,17 @@ void main() async {
     print("🔥 خطأ أثناء تهيئة Firebase: $e");
   }
 
-  runApp(ChangeNotifierProvider(
-      create: (_) => EventProvider(), child: const EventlyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(create: (_) => EventProvider()),
+      ],
+      child: EventlyApp(),
+    ),
+  );
 }
 
 class EventlyApp extends StatelessWidget {
@@ -47,7 +57,7 @@ class EventlyApp extends StatelessWidget {
         HomeScreen.routename: (_) => HomeScreen(),
         CreateEventScreen.routeName: (_) => CreateEventScreen(),
       },
-      initialRoute: HomeScreen.routename,
+      initialRoute: LoginScreen.routename,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,

@@ -10,7 +10,7 @@ class DefaultTextFormField extends StatefulWidget {
     this.validator,
     this.isPassword = false,
     this.onChanged,
-    this.maxLines,
+    this.maxLines = 1,
   });
   TextEditingController? controller;
   String hintText;

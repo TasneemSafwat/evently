@@ -3,6 +3,7 @@ import 'package:evently/firebase_service.dart';
 import 'package:evently/models/category.dart';
 import 'package:evently/models/event.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/home/tabs_item.dart';
 import 'package:evently/widges/default_elevated_button.dart';
 import 'package:evently/widges/default_text_form_field.dart';
@@ -235,6 +236,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
         selectedDate!.minute,
       );
       Event event = Event(
+          userId:
+              Provider.of<UserProvider>(context, listen: false).currentUser!.id,
           title: titleController.text,
           description: descriptionController.text,
           dateTime: dateTime,

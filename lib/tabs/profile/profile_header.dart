@@ -1,5 +1,7 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatelessWidget {
   @override
@@ -27,14 +29,18 @@ class ProfileHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Mhmd Mlazm',
+                  Provider.of<UserProvider>(context, listen: false)
+                      .currentUser!
+                      .name,
                   style: textTheme.displayMedium,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  'Mhmdmlazm@gmail.com',
+                  Provider.of<UserProvider>(context, listen: false)
+                      .currentUser!
+                      .email,
                   style: textTheme.bodyLarge?.copyWith(color: AppTheme.white),
                 ),
               ],

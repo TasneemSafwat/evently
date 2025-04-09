@@ -1,6 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/category.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/home/tabs_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               style: textTheme.bodyMedium?.copyWith(color: AppTheme.white),
             ),
             Text(
-              'mhmd mlazm',
+              Provider.of<UserProvider>(context).currentUser!.name,
               style: textTheme.displayMedium,
             ),
             SizedBox(
