@@ -28,7 +28,7 @@ void main() async {
           : null,
     );
   } catch (e) {
-    print("🔥 خطأ أثناء تهيئة Firebase: $e");
+    print(" خطأ أثناء تهيئة Firebase: $e");
   }
 
   runApp(
@@ -37,7 +37,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
         ),
-        ChangeNotifierProvider(create: (_) => EventProvider()),
+        ChangeNotifierProvider(create: (_) => EventProvider()..getEvents()),
       ],
       child: EventlyApp(),
     ),

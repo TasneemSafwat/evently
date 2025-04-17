@@ -5,17 +5,31 @@ import 'package:evently/widges/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoveTab extends StatelessWidget {
+class LoveTab extends StatefulWidget {
+  @override
+  State<LoveTab> createState() => _LoveTabState();
+}
+
+class _LoveTabState extends State<LoveTab> {
+  late EventProvider eventProvider;
+  late UserProvider userProvider;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      List<String> favouriteEventIds =
+          Provider.of<UserProvider>(context, listen: false)
+              .currentUser!
+              .favouriteEventIds;
+      eventProvider.filterFavoriteEvents(favouriteEventIds);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    EventProvider eventProvider =
-        Provider.of<EventProvider>(context, listen: false);
-    List<String> favouriteEventIds =
-        Provider.of<UserProvider>(context, listen: false)
-            .currentUser!
-            .favouriteEventIds;
-    eventProvider.filterFavoriteEvents(favouriteEventIds);
-
+    eventProvider = Provider.of<EventProvider>(
+      context,
+    );
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),

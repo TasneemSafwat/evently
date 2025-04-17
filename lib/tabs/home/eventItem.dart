@@ -12,6 +12,8 @@ class Eventitem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
     bool isFavourite =
         Provider.of<UserProvider>(context).checkIsEventFavourite(event.id);
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -69,15 +71,12 @@ class Eventitem extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   if (isFavourite) {
-                    Provider.of<UserProvider>(context, listen: false)
-                        .removeEventfromFavourite(event.id);
+                    userProvider.removeEventfromFavourite(event.id);
                     Provider.of<EventProvider>(context, listen: false)
-                        .removeToFavourite(event.id);
+                        .filterFavoriteEvents(
+                            userProvider.currentUser!.favouriteEventIds);
                   } else {
-                    Provider.of<UserProvider>(context, listen: false)
-                        .addEventToFavourite(event.id);
-                    Provider.of<EventProvider>(context, listen: false)
-                        .addToFavourite(event.id);
+                    userProvider.addEventToFavourite(event.id);
                   }
                 },
                 icon: Icon(

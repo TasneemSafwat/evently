@@ -19,6 +19,5 @@ class UserProvider with ChangeNotifier {
 
   void removeEventfromFavourite(String eventId) {
     currentUser!.favouriteEventIds.remove(eventId);
-    notifyListeners();
   }
 }
