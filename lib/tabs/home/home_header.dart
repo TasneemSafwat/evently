@@ -1,6 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/category.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/setting_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/home/tabs_item.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +16,16 @@ class _HomeHeaderState extends State<HomeHeader> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    SettingProvider settingProvider = Provider.of<SettingProvider>(context);
+
     TextTheme textTheme = Theme.of(context).textTheme;
     EventProvider eventProvider = Provider.of<EventProvider>(context);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 16, left: 16),
       decoration: BoxDecoration(
-        color: AppTheme.primary,
+        color:
+            settingProvider.isDark ? AppTheme.backgroundDark : AppTheme.primary,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(16),
           bottomRight: Radius.circular(16),
@@ -61,19 +65,29 @@ class _HomeHeaderState extends State<HomeHeader> {
                       lable: "all",
                       icon: Icons.my_location_outlined,
                       isSelected: currentIndex == 0,
-                      selectedBackgroundColor: AppTheme.white,
-                      selectedForeBackgroundColor: AppTheme.primary,
+                      selectedBackgroundColor: settingProvider.isDark
+                          ? AppTheme.primary
+                          : AppTheme.white,
+                      selectedForeBackgroundColor: settingProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.primary,
                       unselectedForeBackgroundcorlor: AppTheme.white,
                     ),
-                    ...Category.categories.map<Widget>((category) => TabsItem(
-                          lable: category.name,
-                          icon: category.icon,
-                          isSelected: currentIndex ==
-                              Category.categories.indexOf(category) + 1,
-                          selectedBackgroundColor: AppTheme.white,
-                          selectedForeBackgroundColor: AppTheme.primary,
-                          unselectedForeBackgroundcorlor: AppTheme.white,
-                        ))
+                    ...Category.categories.map<Widget>(
+                      (category) => TabsItem(
+                        lable: category.name,
+                        icon: category.icon,
+                        isSelected: currentIndex ==
+                            Category.categories.indexOf(category) + 1,
+                        selectedBackgroundColor: settingProvider.isDark
+                            ? AppTheme.primary
+                            : AppTheme.white,
+                        selectedForeBackgroundColor: settingProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.primary,
+                        unselectedForeBackgroundcorlor: AppTheme.white,
+                      ),
+                    ),
                   ]),
             )
           ],

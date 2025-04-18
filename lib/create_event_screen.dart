@@ -3,6 +3,7 @@ import 'package:evently/firebase_service.dart';
 import 'package:evently/models/category.dart';
 import 'package:evently/models/event.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/setting_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/tabs/home/tabs_item.dart';
 import 'package:evently/widges/default_elevated_button.dart';
@@ -31,6 +32,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+    SettingProvider settingProvider = Provider.of<SettingProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Event'),
@@ -134,6 +137,11 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                             height: 24,
                             width: 24,
                             fit: BoxFit.scaleDown,
+                            colorFilter: ColorFilter.mode(
+                                settingProvider.isDark
+                                    ? AppTheme.white
+                                    : AppTheme.black,
+                                BlendMode.srcIn),
                           ),
                           SizedBox(
                             width: 16,
@@ -178,6 +186,11 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                             height: 24,
                             width: 24,
                             fit: BoxFit.scaleDown,
+                            colorFilter: ColorFilter.mode(
+                                settingProvider.isDark
+                                    ? AppTheme.white
+                                    : AppTheme.black,
+                                BlendMode.srcIn),
                           ),
                           SizedBox(
                             width: 16,

@@ -122,5 +122,117 @@ class AppTheme {
     ),
   );
 
-  static ThemeData darkTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData(
+    primaryColor: primary,
+    appBarTheme: AppBarTheme(
+      backgroundColor: backgroundDark,
+      foregroundColor: primary,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+        color: primary,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(
+        color: grey,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: primary,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: primary,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: red,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: red,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+    scaffoldBackgroundColor: backgroundDark,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primary,
+        foregroundColor: white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primary,
+        textStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    ),
+    textTheme: TextTheme(
+      labelSmall: TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+        color: white,
+      ),
+      bodySmall: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: white,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: white,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: white,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: white,
+      ),
+      displayMedium: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: backgroundDark,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: white,
+        unselectedItemColor: white),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: backgroundDark,
+      foregroundColor: white,
+      shape: CircleBorder(
+        side: BorderSide(width: 5, color: white),
+      ),
+    ),
+  );
 }

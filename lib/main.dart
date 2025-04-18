@@ -4,6 +4,7 @@ import 'package:evently/auth/register_screen.dart';
 import 'package:evently/create_event_screen.dart';
 import 'package:evently/home_screen.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/setting_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -38,6 +39,9 @@ void main() async {
           create: (_) => UserProvider(),
         ),
         ChangeNotifierProvider(create: (_) => EventProvider()..getEvents()),
+        ChangeNotifierProvider(
+          create: (_) => SettingProvider(),
+        )
       ],
       child: EventlyApp(),
     ),
@@ -49,6 +53,8 @@ class EventlyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingProvider settingProvider = Provider.of<SettingProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
@@ -60,7 +66,7 @@ class EventlyApp extends StatelessWidget {
       initialRoute: LoginScreen.routename,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: settingProvider.themeMode,
     );
   }
 }

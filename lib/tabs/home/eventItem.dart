@@ -1,6 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/event.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/setting_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +13,8 @@ class Eventitem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingProvider settingProvider = Provider.of<SettingProvider>(context);
+
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
     bool isFavourite =
@@ -30,7 +33,10 @@ class Eventitem extends StatelessWidget {
       Container(
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
-            color: AppTheme.white, borderRadius: BorderRadius.circular(8)),
+            color: settingProvider.isDark
+                ? AppTheme.backgroundDark
+                : AppTheme.white,
+            borderRadius: BorderRadius.circular(8)),
         padding: EdgeInsets.all(8),
         child: Column(
           children: [
@@ -57,7 +63,10 @@ class Eventitem extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.all(8),
           decoration: BoxDecoration(
-              color: AppTheme.white, borderRadius: BorderRadius.circular(8)),
+              color: settingProvider.isDark
+                  ? AppTheme.backgroundDark
+                  : AppTheme.white,
+              borderRadius: BorderRadius.circular(8)),
           padding: EdgeInsets.all(8),
           child: Row(
             children: [
