@@ -8,6 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProfileTab extends StatelessWidget {
+  List<language> languages = [
+    language(code: 'en', name: 'English'),
+    language(code: 'ar', name: 'العربية'),
+  ];
   @override
   Widget build(BuildContext context) {
     SettingProvider settingProvider = Provider.of<SettingProvider>(context);
@@ -42,6 +46,40 @@ class ProfileTab extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 16,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Language',
+                      style: textTheme.titleLarge?.copyWith(
+                          color: settingProvider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black),
+                    ),
+                    DropdownButton(
+                      value: settingProvider.languageCode,
+                      items: languages
+                          .map(
+                            (language) => DropdownMenuItem(
+                              child: Text(
+                                language.name,
+                                style: textTheme.titleLarge
+                                    ?.copyWith(color: AppTheme.primary),
+                              ),
+                              value: language.code,
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (languageCode) {
+                        if (languageCode != null) {
+                          settingProvider.changeLanguage(languageCode);
+                        }
+                      },
+                      underline: SizedBox(),
+                      iconEnabledColor: AppTheme.primary,
+                    ),
+                  ],
                 ),
                 Spacer(),
                 InkWell(
@@ -81,4 +119,10 @@ class ProfileTab extends StatelessWidget {
       ],
     );
   }
+}
+
+class language {
+  String code;
+  String name;
+  language({required this.code, required this.name});
 }

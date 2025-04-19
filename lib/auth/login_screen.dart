@@ -6,6 +6,7 @@ import 'package:evently/widges/default_elevated_button.dart';
 import 'package:evently/widges/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routename = '/loginScreen';
@@ -67,7 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 24,
                 ),
-                DefaultElevatedButton(lable: 'login', onPressed: login),
+                DefaultElevatedButton(
+                    lable: AppLocalizations.of(context)!.login,
+                    onPressed: login),
                 SizedBox(
                   height: 20,
                 ),
