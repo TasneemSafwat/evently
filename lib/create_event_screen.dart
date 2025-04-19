@@ -10,6 +10,7 @@ import 'package:evently/widges/default_elevated_button.dart';
 import 'package:evently/widges/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -258,9 +259,23 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
       FirebaseService.addEventToFirestore(event).then((_) {
         Provider.of<EventProvider>(context, listen: false).getEvents();
         Navigator.of(context).pop();
-        print('Event Created');
+        Fluttertoast.showToast(
+            msg: "Event Created",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }).catchError((_) {
-        print('Error to Create Event');
+        Fluttertoast.showToast(
+            msg: "Faild to create event",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       });
     }
   }

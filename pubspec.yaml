@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore: ^5.6.6
   provider: ^6.1.4
   firebase_auth: ^5.5.2
+  fluttertoast: ^8.2.12
   flutter_localizations:
     sdk: flutter
 
