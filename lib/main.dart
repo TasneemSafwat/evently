@@ -70,6 +70,7 @@ class EventlyApp extends StatelessWidget {
       themeMode: settingProvider.themeMode,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale(settingProvider.languageCode),
     );
   }
 }

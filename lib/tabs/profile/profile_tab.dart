@@ -37,11 +37,14 @@ class ProfileTab extends StatelessWidget {
                               : AppTheme.black),
                     ),
                     Switch(
-                        value: settingProvider.isDark,
-                        onChanged: (isdark) {
-                          settingProvider.changeTheme(
-                              isdark ? ThemeMode.dark : ThemeMode.light);
-                        }),
+                      value: settingProvider.isDark,
+                      onChanged: (isdark) {
+                        settingProvider.changeTheme(
+                            isdark ? ThemeMode.dark : ThemeMode.light);
+                      },
+                      focusColor: AppTheme.primary,
+                      activeColor: AppTheme.primary,
+                    ),
                   ],
                 ),
                 SizedBox(
