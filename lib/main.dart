@@ -2,10 +2,13 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/auth/login_screen.dart';
 import 'package:evently/auth/register_screen.dart';
 import 'package:evently/create_event_screen.dart';
+import 'package:evently/event_details_screen.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/models/event.dart';
 import 'package:evently/providers/event_provider.dart';
 import 'package:evently/providers/setting_provider.dart';
 import 'package:evently/providers/user_provider.dart';
+import 'package:evently/update_event_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +66,14 @@ class EventlyApp extends StatelessWidget {
         RegisterScreen.routename: (_) => RegisterScreen(),
         HomeScreen.routename: (_) => HomeScreen(),
         CreateEventScreen.routeName: (_) => CreateEventScreen(),
+        UpdateEventScreen.routeName: (context) {
+          final event = ModalRoute.of(context)!.settings.arguments as Event;
+          return UpdateEventScreen(event: event);
+        },
+        EventDetailScreen.routeName: (context) {
+          final event = ModalRoute.of(context)!.settings.arguments as Event;
+          return UpdateEventScreen(event: event);
+        },
       },
       initialRoute: LoginScreen.routename,
       theme: AppTheme.lightTheme,

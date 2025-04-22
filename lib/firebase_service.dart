@@ -24,6 +24,22 @@ class FirebaseService {
     return doc.set(event);
   }
 
+  static Future<void> updateEvent(Event event) async {
+    CollectionReference<Event> eventsCollection = getEventsCollection();
+
+    if (event.id == null || event.id!.isEmpty) {
+      throw Exception("Event ID is required for update.");
+    }
+
+    DocumentReference<Event> doc = eventsCollection.doc(event.id);
+    return doc.set(event, SetOptions(merge: true));
+  }
+
+  static Future<void> deleteEvent(String eventId) async {
+    CollectionReference<Event> eventsCollection = getEventsCollection();
+    await eventsCollection.doc(eventId).delete();
+  }
+
   static Future<List<Event>> getEvents() async {
     CollectionReference<Event> eventsCollection = getEventsCollection();
     QuerySnapshot<Event> querySnapshot =
