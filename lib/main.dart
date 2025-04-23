@@ -4,8 +4,10 @@ import 'package:evently/auth/register_screen.dart';
 import 'package:evently/create_event_screen.dart';
 import 'package:evently/event_details_screen.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/location/location_picker.dart';
 import 'package:evently/models/event.dart';
 import 'package:evently/providers/event_provider.dart';
+import 'package:evently/providers/location_provider.dart';
 import 'package:evently/providers/setting_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/update_event_screen.dart';
@@ -45,6 +47,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EventProvider()..getEvents()),
         ChangeNotifierProvider(
           create: (_) => SettingProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LocationProvider(),
         )
       ],
       child: EventlyApp(),
@@ -66,6 +71,7 @@ class EventlyApp extends StatelessWidget {
         RegisterScreen.routename: (_) => RegisterScreen(),
         HomeScreen.routename: (_) => HomeScreen(),
         CreateEventScreen.routeName: (_) => CreateEventScreen(),
+        LocationPicker.routeName: (_) => LocationPicker(),
         UpdateEventScreen.routeName: (context) {
           final event = ModalRoute.of(context)!.settings.arguments as Event;
           return UpdateEventScreen(event: event);

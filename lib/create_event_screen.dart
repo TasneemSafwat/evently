@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/firebase_service.dart';
+import 'package:evently/location/location_button.dart';
 import 'package:evently/models/category.dart';
 import 'package:evently/models/event.dart';
 import 'package:evently/providers/event_provider.dart';
@@ -222,6 +223,10 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      LocationButton(),
                       SizedBox(
                         height: 16,
                       ),
