@@ -6,6 +6,7 @@ import 'package:evently/event_details_screen.dart';
 import 'package:evently/home_screen.dart';
 import 'package:evently/location/location_picker.dart';
 import 'package:evently/models/event.dart';
+import 'package:evently/onboarding/onboarding_screen.dart';
 import 'package:evently/providers/event_provider.dart';
 import 'package:evently/providers/location_provider.dart';
 import 'package:evently/providers/setting_provider.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,27 +40,26 @@ void main() async {
     print(" خطأ أثناء تهيئة Firebase: $e");
   }
 
+  final prefs = await SharedPreferences.getInstance();
+  final seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => UserProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => EventProvider()..getEvents()),
-        ChangeNotifierProvider(
-          create: (_) => SettingProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => LocationProvider(),
-        )
+        ChangeNotifierProvider(create: (_) => SettingProvider()),
+        ChangeNotifierProvider(create: (_) => LocationProvider())
       ],
-      child: EventlyApp(),
+      child: EventlyApp(showOnboarding: !seenOnboarding),
     ),
   );
 }
 
 class EventlyApp extends StatelessWidget {
-  const EventlyApp({super.key});
+  final bool showOnboarding;
+
+  const EventlyApp({super.key, required this.showOnboarding});
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +73,18 @@ class EventlyApp extends StatelessWidget {
         HomeScreen.routename: (_) => HomeScreen(),
         CreateEventScreen.routeName: (_) => CreateEventScreen(),
         LocationPicker.routeName: (_) => LocationPicker(),
+        OnboardingScreen.routeName: (_) => const OnboardingScreen(),
         UpdateEventScreen.routeName: (context) {
           final event = ModalRoute.of(context)!.settings.arguments as Event;
           return UpdateEventScreen(event: event);
         },
         EventDetailScreen.routeName: (context) {
           final event = ModalRoute.of(context)!.settings.arguments as Event;
-          return UpdateEventScreen(event: event);
+          return EventDetailScreen(event: event);
         },
       },
-      initialRoute: LoginScreen.routename,
+      initialRoute:
+          showOnboarding ? OnboardingScreen.routeName : LoginScreen.routename,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: settingProvider.themeMode,
