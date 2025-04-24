@@ -1,3 +1,4 @@
+import 'package:evently/app_theme.dart';
 import 'package:evently/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,13 +23,14 @@ class OnboardingScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF0E1C2F) : Colors.white,
+      backgroundColor:
+          isDark ? AppTheme.backgroundDark : AppTheme.backgroundZLight,
       body: SafeArea(
         child: Column(
           children: [
             const Spacer(),
             Image.asset(
-              'assets/images/onboarding1.png',
+              'assets/images/boarding1.png',
               width: screenWidth * 0.9,
               fit: BoxFit.contain,
             ),
@@ -40,7 +42,7 @@ class OnboardingScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
-                  color: isDark ? Colors.white : const Color(0xFF0E1C2F),
+                  color: isDark ? AppTheme.white : AppTheme.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -53,7 +55,7 @@ class OnboardingScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: isDark ? Colors.white70 : Colors.black87,
+                  color: isDark ? AppTheme.white : AppTheme.black,
                 ),
               ),
             ),
@@ -61,8 +63,7 @@ class OnboardingScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () => _goToLogin(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    isDark ? Colors.white : const Color(0xFF0E1C2F),
+                backgroundColor: AppTheme.primary,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 shape: RoundedRectangleBorder(
@@ -73,7 +74,7 @@ class OnboardingScreen extends StatelessWidget {
                 "Let's Start",
                 style: TextStyle(
                   fontSize: 16,
-                  color: isDark ? const Color(0xFF0E1C2F) : Colors.white,
+                  color: isDark ? AppTheme.white : AppTheme.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
